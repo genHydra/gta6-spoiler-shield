@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "GTA 6 Spoiler Shield",
-  "version": "1.0.0",
-  "description": "Hides GTA 6 posts, videos, comments and chat on YouTube, Reddit, X, Twitch and Discord until you're ready.",
+  "version": "1.1.0",
+  "description": "Hides GTA 6 posts, videos, comments and chat on YouTube, Reddit, X, Twitch, Discord and Instagram until you're ready.",
   "permissions": ["storage"],
   "background": { "service_worker": "background.js" },
   "action": {
@@ -21,6 +21,7 @@
         "*://twitter.com/*",
         "*://*.twitter.com/*",
         "*://*.twitch.tv/*",
+        "*://*.instagram.com/*",
         "*://discord.com/*",
         "*://*.discord.com/*"
       ],

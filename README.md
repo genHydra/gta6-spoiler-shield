@@ -1,10 +1,10 @@
 # GTA 6 Spoiler Shield
 
-A Chrome extension that hides GTA 6 spoilers on **YouTube, Reddit, X, Twitch and Discord (web)** until you're ready.
+A Chrome extension that hides GTA 6 spoilers on **YouTube, Reddit, X, Twitch, Discord and Instagram (web)** until you're ready.
 
 ## What it does
 - **Hides matching posts, videos, comments and chat messages.** Each one collapses behind a "Show anyway" bar, or you can set it to remove them completely.
-- **Covers whole pages that are about GTA 6** (a GTA 6 video, subreddit, Twitch stream or search) with a "Get me out of here" screen, and pauses the video.
+- **Covers whole pages that are about GTA 6** (a GTA 6 video, subreddit, Twitch stream, Instagram post/reel/hashtag, or search) with a "Get me out of here" screen, and pauses the video.
 - **Blurs stray links and titles** in sidebars and suggestions. Click once to reveal one.
 - **Shows a count** of hidden items on the toolbar icon.
 
@@ -20,4 +20,4 @@ You can edit the list from the extension popup.
 
 ## Limits
 - It only matches text, so an image or clip with no GTA words in its caption can still get through.
-- It doesn't cover the Discord desktop app (use Discord in the browser) or phone apps.
+- It doesn't cover the Discord desktop app (use Discord in the browser) or phone apps, including the Instagram app.

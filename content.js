@@ -32,6 +32,27 @@
       { sel: "article, .side-nav-card, [data-a-target='followed-channel'], [data-a-target='recommended-channel'], [data-a-target='side-nav-card']" },
       { sel: "[data-a-target='search-result-live-channel'], [data-a-target='search-result-category'], [data-a-target='search-result-video'], .search-result-card" }
     ],
+    instagram: [
+      // feed posts, post pop-ups, explore/profile grid tiles (their image alt text carries the caption)
+      { sel: "article, a[href*='/p/'], a[href*='/reel/'], a[href^='/explore/tags/'], a[href^='/explore/search/']" },
+      // Reels: the biggest box around each video that holds only that video (video + caption + comments button)
+      { collect: function () {
+          var out = [];
+          var vids = document.querySelectorAll("video");
+          for (var i = 0; i < vids.length; i++) {
+            var el = vids[i];
+            while (el.parentElement) {
+              var p = el.parentElement;
+              if (p === document.body || p.tagName === "MAIN" || p.getAttribute("role") === "dialog" || p.tagName === "SECTION") break;
+              if (p.querySelectorAll("video").length > 1) break;
+              if ((p.textContent || "").length > 2500) break;
+              el = p;
+            }
+            if (el !== vids[i] && out.indexOf(el) < 0) out.push(el);
+          }
+          return out;
+        } }
+    ],
     discord: [
       { sel: "li[id^='chat-messages-']" },
       { sel: "[class*='mainCard_'], [class*='forumPost_'], [class*='autocompleteRow_']" }
@@ -43,11 +64,12 @@
     /(^|\.)reddit\.com$/.test(host) ? "reddit" :
     /(^|\.)(x|twitter)\.com$/.test(host) ? "x" :
     /(^|\.)twitch\.tv$/.test(host) ? "twitch" :
+    /(^|\.)instagram\.com$/.test(host) ? "instagram" :
     /(^|\.)discord\.com$/.test(host) ? "discord" : null;
   if (!site) return;
 
   var rules = SITE_RULES[site];
-  var allCardSel = rules.map(function (r) { return r.sel; }).join(", ");
+  var allCardSel = rules.filter(function (r) { return r.sel; }).map(function (r) { return r.sel; }).join(", ");
 
   var settings = Object.assign({}, GSB_DEFAULTS);
   var regex = gsbBuildRegex(settings.keywords);
@@ -134,7 +156,7 @@
     for (var r = 0; r < rules.length; r++) {
       var rule = rules[r];
       var els;
-      try { els = document.querySelectorAll(rule.sel); } catch (e) { continue; }
+      try { els = rule.collect ? rule.collect() : document.querySelectorAll(rule.sel); } catch (e) { continue; }
       for (var i = 0; i < els.length; i++) {
         var el = els[i];
         // skip a card nested inside a card that's already hidden
@@ -158,7 +180,7 @@
     var els = document.querySelectorAll("a[href], [title], h1, h2, h3");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
-      if (el.closest("[data-gsb-ph], .gsb-guard")) continue;
+      if (el.closest("[data-gsb-ph], .gsb-guard, [data-gsb]")) continue;
       // links inside a known card are judged with the card, not on their own
       if (el.closest(allCardSel)) { el.classList.remove("gsb-blur", "gsb-revealed"); continue; }
       var text = (el.textContent || "").slice(0, 400) + attrText(el);
@@ -204,6 +226,8 @@
       if (title) bits.push(title.textContent);
     }
     if (site === "reddit" || site === "x") bits.push(document.title);
+    // Instagram post/reel pages put the caption in the tab title
+    if (site === "instagram" && /^\/(p|reel|reels|explore\/tags)\//.test(location.pathname)) bits.push(document.title);
     return bits.join(" | ");
   }
 
