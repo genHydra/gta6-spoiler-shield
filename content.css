@@ -1,0 +1,79 @@
+[data-gsb="hidden"] {
+  display: none !important;
+}
+
+.gsb-ph {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 30px;
+  margin: 4px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px dashed rgba(236, 72, 153, 0.55);
+  background: rgba(236, 72, 153, 0.08);
+  color: #ec4899;
+  font: 600 12px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: 0.2px;
+}
+.gsb-ph-btn {
+  all: unset;
+  cursor: pointer;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #ec4899;
+  color: #fff;
+  font: 600 11px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  white-space: nowrap;
+}
+.gsb-ph-btn:hover { background: #db2777; }
+
+/* stray links/titles outside a known card */
+.gsb-blur:not(.gsb-revealed) {
+  filter: blur(7px) !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+.gsb-blur:not(.gsb-revealed) img { filter: blur(10px) !important; }
+
+/* full-page guard */
+.gsb-guard {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 6, 20, 0.86);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.gsb-guard-box {
+  max-width: 440px;
+  padding: 28px 30px;
+  border-radius: 18px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(160deg, rgba(236, 72, 153, 0.22), rgba(249, 115, 22, 0.16));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.gsb-guard-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.gsb-guard-sub { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
+.gsb-guard-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.gsb-guard-actions button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.gsb-guard-back { background: #ec4899; color: #fff; }
+.gsb-guard-back:hover { background: #db2777; }
+.gsb-guard-go { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.75); }
+.gsb-guard-go:hover { background: rgba(255, 255, 255, 0.18); }

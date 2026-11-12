@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "GTA 6 Spoiler Shield",
+  "version": "1.0.0",
+  "description": "Hides GTA 6 posts, videos, comments and chat on YouTube, Reddit, X, Twitch and Discord until you're ready.",
+  "permissions": ["storage"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GTA 6 Spoiler Shield",
+    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.reddit.com/*",
+        "*://x.com/*",
+        "*://*.x.com/*",
+        "*://twitter.com/*",
+        "*://*.twitter.com/*",
+        "*://*.twitch.tv/*",
+        "*://discord.com/*",
+        "*://*.discord.com/*"
+      ],
+      "js": ["shared.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
